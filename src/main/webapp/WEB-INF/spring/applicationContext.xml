@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc 
+                           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.avior" />
+
+
+	<!-- _________________________Spring Persistence____________________________ -->
+
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="/WEB-INF/properties/jdbc.properties" />
+	</bean>
+	
+	
+
+<!-- 	<bean id="dataSource" -->
+<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<property name="driverClassName" value="${jdbc.driverClassName}" /> -->
+<!-- 		<property name="url" value="${jdbc.databaseurl}" /> -->
+<!-- 		<property name="username" value="${jdbc.username}" /> -->
+<!-- 		<property name="password" value="${jdbc.password}" /> -->
+<!-- 	</bean> -->
+	
+
+<!-- 	<bean id="sessionFactory" -->
+<!-- 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSource" /> -->
+
+<!-- 		<property name="annotatedClasses"> -->
+<!-- 			<list> -->
+<!-- 				<value>com.avior.model.jpa.Cliente</value> -->
+<!-- 				<value>com.avior.model.jpa.DatosPersonales</value> -->
+<!-- 				<value>com.avior.model.jpa.Dispositivo</value> -->
+<!-- 				<value>com.avior.model.jpa.Registro</value> -->
+<!-- 				<value>com.avior.model.jpa.User</value> -->
+<!-- 				<value>com.avior.model.jpa.Authority</value> -->
+<!-- 				<value>com.avior.model.jpa.Group</value> -->
+<!-- 				<value>com.avior.model.jpa.GroupAuthority</value> -->
+<!-- 				<value>com.avior.model.jpa.GroupMember</value> -->
+<!-- 				<value>com.avior.model.jpa.Pref</value> -->
+<!-- 				<value>com.avior.model.jpa.Fence</value> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.dialect">${jdbc.dialect}</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
+	<!--______________________ Nueva Base de Datos ____________________ -->
+	
+	<bean id="dataSourceTav"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.databaseurl.tav}" />
+		<property name="username" value="${jdbc.username.tav}" />
+		<property name="password" value="${jdbc.password.tav}" />
+	</bean>
+
+
+	<bean id="sessionFactoryTav"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceTav" />
+
+		<property name="annotatedClasses">
+			<list>				
+				<!-- Entidades de tablas -->
+				<value>com.avior.model.tav.Tavusuario</value>
+				<value>com.avior.model.tav.Tavcatperfile</value>				
+				<value>com.avior.model.tav.Tavusuariodisp</value>
+				<value>com.avior.model.tav.Tavperfilusuario</value>
+				<value>com.avior.model.tav.Tavregisdispvista</value>
+				<value>com.avior.model.tav.Tavcatcerca</value>
+				<value>com.avior.model.tav.Tavcercadisp</value>
+				<value>com.avior.model.tav.Tavcatdispositivo</value>
+				<!-- Entidades de rutinas db -->
+				<value>com.avior.model.routine.RSchipDispositivo</value>
+				<value>com.avior.model.routine.RSultimoPunto</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+				<prop key="hibernate.show_sql">false</prop>
+
+			</props>
+		</property>
+	</bean>
+	<!-- _____________________________________________________________ -->
+
+<!-- 	<bean id="hibernateTransactionManager" -->
+<!-- 		class="org.springframework.orm.hibernate3.HibernateTransactionManager"> -->
+<!-- 		<property name="sessionFactory" ref="sessionFactory" />		 -->
+<!-- 	</bean> -->
+
+<!-- 	<tx:annotation-driven transaction-manager="hibernateTransactionManager" /> -->
+	
+	<bean id="hibernateTransactionManagerTav"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactoryTav" />		
+	</bean>
+
+	<tx:annotation-driven transaction-manager="hibernateTransactionManagerTav" />
+
+	<!--_________________________Java Mail_________________________________ -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="polux.avior.com.mx"></property>
+		<property name="port" value="587"></property>
+
+		<property name="username" value="contacto@avior.com.mx"></property>
+		<property name="password" value="zXaC72ki$1"></property>		
+		<property name="javaMailProperties">
+			<props>
+				<!-- Usar SMTP -->
+				<prop key="mail.transport.protocol">smtp</prop>
+				<!-- Usar SMTP-AUTH para autenticar -->
+				<prop key="mail.smtp.auth">true</prop>
+				<!-- Usar TLS para encriptar comunicacion -->
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="alertMailMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from">
+			<value>contacto@avior.com.mx</value>
+		</property>
+		<property name="to">
+			<value>contacto@avior.com.mx</value>
+		</property>
+		<property name="subject" value="Alerta - Ocurrió una excepción"></property>
+	</bean>
+</beans>
+

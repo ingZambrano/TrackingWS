@@ -1,0 +1,17 @@
+El proyecto puede ser importado directamente a Eclipse o SpringSource Tool Suite
+Si es el caso de Eclipse hay que contar con el plugin de Maven que se puede agregar
+desde:
+			http://download.eclipse.org/technology/m2e/releases 
+Para el caso del STS, este IDE ya trae integrado por default el plugin de Maven.
+
+
+En caso de que Eclipse no detecte la configuración de Maven, se tiene que agregar 
+el manejo de dependencias por Maven (Click derecho en el proyecto -> Maven -> Add Dependency...)
+ya con esto se puede tardar unos minutos en descargar las dependencias.
+
+Finalmente hay que configurar el server que se lanze desde Eclipse/STS para que deploye 
+el proyecto desde la raíz, ya que los javascript y CSS están refrenciados de manera absoluta
+1.- En el Server View doble click en Tomcat
+2.- En la pestaña "Módulos" editar el path de trtackingWS a la raíz (/)
+
+

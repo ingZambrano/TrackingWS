@@ -1,0 +1,38 @@
+#footer {
+	font-family: "Lucida Sans Unicode", Verdana, Arial, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	right: 50px;
+	bottom: 50px;
+	position: absolute;
+}
+
+
+#goHome {
+	left: 50px;
+	bottom: 50px;
+	position: absolute;
+}
+
+#goHome:HOVER {
+	cursor: pointer;
+}
+
+#imgDescripcion {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 40px;
+	/*right: 0;*/
+	background: rgba(29, 106, 154, 0.72);
+	color: #fff;
+	visibility: hidden;
+	opacity: 0;
+	width:60px;
+	height: 20px;
+}
+
+#goHome:HOVER #imgDescripcion{
+	visibility: visible;
+	opacity: 1;
+}

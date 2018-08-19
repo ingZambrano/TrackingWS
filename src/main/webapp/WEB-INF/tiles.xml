@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+
+	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+	</definition>
+
+	<!-- From UsersController -->
+<!-- 	<definition name="addUser" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Agregar usuario" /> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/jsp/content/registro.jsp" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="userdetails" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Detalles de usuario" /> -->
+<!-- 		<put-attribute name="content" -->
+<!-- 			value="/WEB-INF/jsp/content/userdetails.jsp" /> -->
+<!-- 	</definition> -->
+
+
+	<!-- From ClientesController -->
+<!-- 	<definition name="addClient" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Agregar cliente" /> -->
+<!-- 		<put-attribute name="content" -->
+<!-- 			value="/WEB-INF/jsp/content/add_client.jsp" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="clientDetails" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Detalles de cliente" /> -->
+<!-- 		<put-attribute name="content" -->
+<!-- 			value="/WEB-INF/jsp/content/clientDetails.jsp" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="assignDev" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Asignar dispositivo" /> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/jsp/content/link_dev.jsp" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="removeDevice" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Remover dispositivo" /> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/jsp/content/rem_dev.jsp" /> -->
+<!-- 	</definition> -->
+<!-- 	<definition name="editData" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Editar mis datos" /> -->
+<!-- 		<put-attribute name="content" -->
+<!-- 			value="/WEB-INF/jsp/content/editPersonalData.jsp" /> -->
+<!-- 	</definition> -->
+
+	<!-- From HomeController -->
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="Página principal" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/index.jsp" />
+	</definition>
+
+	<!-- Home Page -->
+	<definition name="homePage" template="/WEB-INF/jsp/layoutHome.jsp">
+		<put-attribute name="title" value="Sistemas Avior" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/content/menuHome.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/contentHome.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/jsp/content/footerHome.jsp" />
+	</definition>
+	<definition name="mensajeCorrecto" template="/WEB-INF/jsp/content/mensaje_correcto.jsp">
+		<put-attribute name="title" value="Sistemas Avior" />
+		
+	</definition>
+	<definition name="mensajeError" template="/WEB-INF/jsp/content/mensaje_error.jsp">
+		<put-attribute name="title" value="Sistemas Avior" />
+		
+	</definition>
+	
+		<!-- From AjaxController -->
+	<!-- <definition name="ajaxform" extends="base.definition"> -->
+	<!-- <put-attribute name="title" value="Rastreo de unidades"/> -->
+	<!-- <put-attribute name="content" value="/WEB-INF/jsp/ajax/jsonCoords.jsp"/> -->
+	<!-- </definition> -->
+
+
+	<!-- From LoginLogoutController -->
+	<!-- <definition name="login" extends="base.definition"> -->
+	<!-- <put-attribute name="title" value="Inicio de sesión"/> -->
+	<!-- <put-attribute name="content" value="/WEB-INF/jsp/login.jsp"/> -->
+	<!-- </definition> -->
+	<definition name="renovarpass" extends="base.definition">
+		<put-attribute name="title" value="Cambiar contraseña" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/reset_pass.jsp" />
+	</definition>
+	<definition name="resetpass" extends="base.definition">
+		<put-attribute name="title" value="Reestablecer la contraseña" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/forgotten_pwd.jsp" />
+	</definition>
+<!-- 	<definition name="registro" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Registro de usuario nuevo" /> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/jsp/content/registro.jsp" /> -->
+<!-- 	</definition> -->
+
+
+	<!-- From TrackingController -->
+	<definition name="tracking" extends="base.definition">
+		<put-attribute name="title" value="Rastreo de Unidades" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/trackingmap.jsp" />
+	</definition>
+	<definition name="fences" extends="base.definition">
+		<put-attribute name="title" value="Editar cercas virtuales" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/editFences.jsp" />
+	</definition>
+
+	<!-- From CommentController -->
+	<definition name="contact" extends="base.definition">
+		<put-attribute name="title" value="Contacto" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/comments.jsp" />
+	</definition>
+	<definition name="about" extends="base.definition">
+		<put-attribute name="title" value="Quienes somos" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/about.jsp" />
+	</definition>
+	<definition name="commentSuccess" extends="base.definition">
+		<put-attribute name="title" value="Comentario enviado" />
+		<put-attribute name="content"
+			value="/WEB-INF/jsp/content/commentSuccess.jsp" />
+	</definition>
+
+	<!-- From ReportController -->
+	<definition name="reportes" extends="base.definition">
+		<put-attribute name="title" value="Menú de reportes" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/reportes.jsp" />
+	</definition>
+
+	<!-- GENERAL -->
+	<definition name="error" extends="base.definition">
+		<put-attribute name="title" value="Error" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/error.jsp" />
+	</definition>
+
+	<!-- <definition name="administrative" extends="base.definition"> -->
+	<!-- <put-attribute name="title" value="Menú Administrativo"/> -->
+	<!-- <put-attribute name="content" value="/WEB-INF/jsp/administrative.jsp"/> -->
+	<!-- </definition> -->
+
+	<!-- <definition name="location" extends="base.definition"> -->
+	<!-- <put-attribute name="title" value="Ubicación"/> -->
+	<!-- <put-attribute name="content" value="/WEB-INF/jsp/location.jsp"/> -->
+	<!-- </definition> -->
+
+	<definition name="message" extends="base.definition">
+		<put-attribute name="title" value="Atención" />
+		<put-attribute name="content" value="/WEB-INF/jsp/content/message.jsp" />
+	</definition>
+	
+	<!-- From AdministrativeController -->
+<!-- 	<definition name="manageusers" extends="base.definition"> -->
+<!-- 		<put-attribute name="title" value="Administración de usuarios"/> -->
+<!-- 		<put-attribute name="content" value="/WEB-INF/jsp/content/manageusers.jsp"/> -->
+<!-- 	</definition> -->
+</tiles-definitions>
+

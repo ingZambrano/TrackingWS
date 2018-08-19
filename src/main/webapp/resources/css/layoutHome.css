@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font: 14px/1.3 Arial, sans-serif;
+	background: url("../image/fondo_home.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+img {
+	max-width: 100%;
+}
+
+label {
+	
+	position:absolute;
+	font-family: "Lucida Sans Unicode",Verdana,Arial,sans-serif;
+    font-size: 13px;
+    height: 36px;
+	top:300px;
+	position:relative;
+}
+
+p{
+	text-align: center;
+	font-family: "Lucida Sans Unicode", Verdana, Arial, sans-serif;
+	font-weight:bold;
+	font-size: 12;
+	
+}

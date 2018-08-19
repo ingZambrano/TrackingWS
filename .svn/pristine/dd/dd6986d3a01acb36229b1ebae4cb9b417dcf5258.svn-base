@@ -1,0 +1,10 @@
+reporteMovimiento.(class)=org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView
+reporteMovimiento.url=/WEB-INF/jasperTemplates/reporteMovimiento.jasper
+#Agregado para evitar que Jasper agregue una imagen "nullpx" en el HTML
+reporteMovimiento.exporterParameters[net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN]=false
+reporteGeneral.(class)=org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView
+reporteGeneral.url=/WEB-INF/jasperTemplates/reporteGeneral.jasper
+#Agregado para evitar que Jasper agregue una imagen "nullpx" en el HTML
+reporteGeneral.exporterParameters[net.sf.jasperreports.engine.export.JRHtmlExporterParameter.IS_USING_IMAGES_TO_ALIGN]=false
+#reporte1.reportDataKey=reporte1Key
+

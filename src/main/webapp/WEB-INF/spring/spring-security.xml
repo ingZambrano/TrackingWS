@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+                           
+    
+    <beans:import resource="applicationContext.xml"/>
+    
+    <!-- _________________________Password Encoder para Spring Security___________________-->
+	<beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" 
+		id="passwordEncoder">
+		<!-- Se almacenará el hash SHA-1 de las contraseñas, si se quiere cambiar el SHA-x se pone a continuacion 
+		<beans:constructor-arg value="256"/>		
+		-->
+		</beans:bean>
+		
+	<beans:bean class="org.springframework.security.authentication.dao.ReflectionSaltSource" id="saltSource">	
+		<beans:property name="userPropertyToUse" value="username"/>	
+	</beans:bean>
+    
+<!--     <beans:bean id="customUserDetailsService" -->
+<!-- 		class="com.avior.services.UserDetailsServiceImpl"> -->
+<!-- 	</beans:bean>    -->
+	 <beans:bean id="servicioDetalleUsuario"
+		class="com.avior.services.ServicioDetalleUsuario">
+	</beans:bean>   
+	
+	<beans:bean class="com.avior.security.NonAjaxRequestMatcher" id="nonAjaxRequestMatcher" />
+	
+	<beans:bean id="loginUrlAuthenticationEntryPoint" 
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/intellitracker"/>
+	</beans:bean>
+	
+	<beans:bean id="ajaxAuthenticationEntryPoint"
+    	class="com.avior.security.CustomHttp403ForbiddenEntryPoint" />
+    
+    <beans:bean id="authenticationEntryPoint"
+    	class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
+    	<beans:constructor-arg>
+        	<beans:map>
+            	<beans:entry key-ref="nonAjaxRequestMatcher" value-ref="loginUrlAuthenticationEntryPoint" />
+        	</beans:map>
+    	</beans:constructor-arg>
+    	<beans:property name="defaultEntryPoint" ref="ajaxAuthenticationEntryPoint" />
+	</beans:bean>
+
+
+	
+	    
+	<!--________________________________ Terminan los beans ___________________________- -->
+	
+	
+    <http use-expressions="true" disable-url-rewriting="true" entry-point-ref="authenticationEntryPoint" >
+    	
+    	<!-- Public pages -->
+    	<intercept-url pattern="/" access="permitAll"/>
+    	<intercept-url pattern="/about" access="permitAll"/>
+    	<intercept-url pattern="/auth/login" access="permitAll"/>
+    	<intercept-url pattern="/auth/forgot" access="permitAll"/>
+    	<intercept-url pattern="/images/*" access="permitAll"/>    	    	
+    	<intercept-url pattern="/styles/*" access="permitAll"/>    	
+    	<intercept-url pattern="/ubicacion**" access="permitAll"/>
+    	<intercept-url pattern="/users/register" access="permitAll"/>
+    	<intercept-url pattern="/users/save" access="permitAll"/>
+    	<intercept-url pattern="/js**" access="permitAll"/>
+    	
+
+		<!-- Normal User pages -->
+    	<intercept-url pattern="/users**" access="hasRole('ROLE_USER')"/>
+    	<intercept-url pattern="/clients**" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/tracking**" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/cercas/**" access="hasRole('ROLE_USER') and isAuthenticated()"/>
+		<intercept-url pattern="/reportes**" access="hasRole('ROLE_USER')"/>
+		<intercept-url pattern="/auth/**" access="hasRole('ROLE_USER')"/>
+		
+    	
+    	<!-- Administrative pages (Admin or Employee)-->
+    	<intercept-url pattern="/users/add" access="hasRole('ROLE_ADMIN')"/>    	
+    	<intercept-url pattern="/users/details" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/add" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/save" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/link" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/assign" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/remdevice" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/clients/remove" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/administrativo" access="hasRole('ROLE_ADMIN')"/>
+    	<intercept-url pattern="/manage**" access="hasRole('ROLE_ADMIN')"/>
+    	
+    	<intercept-url pattern="/ajax/**" access="hasRole('ROLE_USER') and isAuthenticated()"/>
+    	
+<!--     	Produccion -->
+    	<form-login login-page="https://avior.com.mx/auth/login"
+    	            default-target-url="https://avior.com.mx/tracking"
+                    always-use-default-target="true"/>
+
+<!-- 		Desarrollo -->
+<!--         <form-login login-page="/auth/login" -->
+<!--     	            default-target-url="/tracking" -->
+<!--                     always-use-default-target="true"/> -->
+                    
+                            
+    	<logout invalidate-session="true" logout-success-url="/"
+    		logout-url="/auth/logout" />
+    	<!--  
+    	<remember-me key="rememberUser" user-service-ref="customUserDetailsService"/>
+    	-->
+    </http>
+    
+    <authentication-manager alias="authenticationManager">
+       	<authentication-provider user-service-ref="servicioDetalleUsuario">
+       		<password-encoder ref="passwordEncoder">       		  
+       			<salt-source ref="saltSource"/>       			
+       		</password-encoder>
+       	</authentication-provider>
+       	
+    	<authentication-provider>    		    	    			
+    		<user-service>    			
+    			<user name="guest" password="guest"	authorities="ROLE_USER"/>
+    		</user-service>
+    	</authentication-provider>
+    </authentication-manager> 
+    
+</beans:beans>

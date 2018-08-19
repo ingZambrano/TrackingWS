@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteGeneral" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cebe44f8-26f3-41c7-9fcc-372eeb256eb0">
+	<parameter name="customTitle" class="java.lang.String"/>
+	<field name="entrada" class="java.util.Date"/>
+	<field name="latitud" class="java.lang.Double"/>
+	<field name="longitud" class="java.lang.Double"/>
+	<field name="insideFence" class="java.lang.Boolean"/>
+	<field name="alias" class="java.lang.String"/>
+	<field name="ultimoDato" class="java.util.Date"/>
+	<field name="secondsElapsed" class="java.lang.Long"/>
+	<variable name="totalFuera" class="java.lang.Long" resetType="Group" resetGroup="Vehiculo" calculation="Sum">
+		<variableExpression><![CDATA[$F{secondsElapsed}]]></variableExpression>
+	</variable>
+	<variable name="dias" class="java.lang.Long" resetType="Group" resetGroup="Vehiculo">
+		<variableExpression><![CDATA[new Long($V{totalFuera}.longValue()/86400L)]]></variableExpression>
+	</variable>
+	<variable name="horas" class="java.lang.Long" resetType="Group" resetGroup="Vehiculo">
+		<variableExpression><![CDATA[new Long(($V{totalFuera}.longValue()%86400)/3600L)]]></variableExpression>
+	</variable>
+	<variable name="minutos" class="java.lang.Long" resetType="Group" resetGroup="Vehiculo">
+		<variableExpression><![CDATA[new Long((($V{totalFuera}.longValue()%86400L)%3600L)/60L)]]></variableExpression>
+	</variable>
+	<variable name="segundos" class="java.lang.Long" resetType="Group" resetGroup="Vehiculo">
+		<variableExpression><![CDATA[new Long((($V{totalFuera}.longValue() % 86400L) % 3600L) % 60L)]]></variableExpression>
+	</variable>
+	<group name="Vehiculo">
+		<groupExpression><![CDATA[$F{alias}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<rectangle>
+					<reportElement uuid="64c89256-a691-48b9-9c76-2ca8a7e584e9" x="10" y="30" width="572" height="20" backcolor="#8CBCFE"/>
+				</rectangle>
+				<staticText>
+					<reportElement uuid="b22d17ea-2d1c-4879-bd9b-ab8dd1973afe" x="144" y="30" width="100" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Latitud]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7d278ddc-67d4-4cee-962e-010f93dac313" x="244" y="30" width="108" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Longitud]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8e8a2665-8c60-4af9-a658-1eb8d90f8aad" x="34" y="30" width="110" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="de7403ff-0e83-4b1b-bb3f-0f6e1bd8a8db" x="352" y="30" width="133" height="20"/>
+					<textElement textAlignment="Center">
+						<font size="14"/>
+					</textElement>
+					<text><![CDATA[Tiempo fuera (seg)]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="4dcc14c5-7fa4-4680-86ef-5008aa19c08b" x="10" y="0" width="189" height="30"/>
+					<textElement>
+						<font size="15"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{alias}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="97">
+				<staticText>
+					<reportElement uuid="d308ba7c-3a2b-4bec-b187-32f0a9e21f2d" x="10" y="0" width="146" height="20"/>
+					<textElement/>
+					<text><![CDATA[Tiempo total fuera de zona: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="0f17c9ce-e520-4889-a7a4-248948941ff5" x="156" y="0" width="43" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{dias}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ab4c8cc8-aebd-4647-994f-ed4a392f0ecb" x="318" y="0" width="34" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{minutos}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f218170d-1ab1-445c-8941-4a77e0f286bc" x="414" y="0" width="29" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{segundos}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="4e10513a-76de-45be-b9a9-0dc17fc4ced3" x="199" y="0" width="27" height="20"/>
+					<textElement/>
+					<text><![CDATA[días, ]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="355c1887-a4e3-4118-a3ed-b8c1f8a7cb24" x="226" y="0" width="51" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{horas}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="bc3c1b16-9380-496c-918a-c642a0615fda" x="277" y="0" width="41" height="20"/>
+					<textElement/>
+					<text><![CDATA[horas, ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f2070cdd-94a3-4744-943a-5e8075a0bf9f" x="352" y="0" width="62" height="20"/>
+					<textElement/>
+					<text><![CDATA[minutos, y]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="730d0114-bf09-41cf-8926-c8c1a916cfe1" x="443" y="0" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[segundos]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cab314c8-e4fe-4027-99ab-da807d9dc7c4" x="0" y="-1" width="572" height="56"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{customTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9e7c49a4-0931-42ce-9371-b3033cc55ea9" x="0" y="1" width="572" height="34"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<text><![CDATA[Historial de vehículos fuera de zona]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cf3b1e4d-0b66-4a13-bdc0-97837291a489" x="34" y="0" width="110" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{entrada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="626d42c8-0f9e-46b2-b698-48b5184642a5" x="144" y="0" width="100" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{latitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="200cb56f-619e-49e9-b6d5-65e5f445e204" x="244" y="0" width="108" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{longitud}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="08a49711-8436-411d-9220-3f3e5fcfab16" x="352" y="0" width="133" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{secondsElapsed}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="38" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement uuid="bf5a6685-a438-4f13-bfe1-b409f308606c" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b6d0a83c-778e-4b93-9b34-4454ef23ec22" x="453" y="0" width="76" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pág. "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="88495dc0-dba3-499a-bcff-256dec1e0808" x="529" y="0" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="410" splitType="Stretch"/>
+	</summary>
+</jasperReport>

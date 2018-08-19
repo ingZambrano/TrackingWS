@@ -1,0 +1,89 @@
+
+#construccion{
+	
+	text-align: justify;
+	font-family: "Lucida Sans Unicode", Verdana, Arial, sans-serif;
+	font-size: 30px;
+	font-weight: bold;
+	height: 400px;
+	width: 520px;
+	
+}
+#historia {
+	text-align: justify;
+	font-family: "Lucida Sans Unicode", Verdana, Arial, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	height: 400px;
+	width: 560px;
+	left:2%;
+	position: relative;
+}
+
+
+
+#divContenido {
+	/*border: solid 1px #ccc;*/
+	width: 615px;
+	height: 450px;
+	border-radius: 5px;
+	box-shadow: 1px 1px 10px #ccc;
+	position: absolute;
+	/* unicamente para centrar la capa contenedora en el documento */
+	left: 55%;
+	margin-left: -377px;
+	top: 200px;
+	background: -moz-radial-gradient(center, ellipse cover, rgba(125, 185, 232, 1)
+		0%, rgba(125, 185, 232, 0) 90%, rgba(125, 185, 232, 0) 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(0%, rgba(125, 185, 232, 1)),
+		color-stop(90%, rgba(125, 185, 232, 0)),
+		color-stop(100%, rgba(125, 185, 232, 0))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(125, 185, 232, 1)
+		0%, rgba(125, 185, 232, 0) 90%, rgba(125, 185, 232, 0) 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, rgba(125, 185, 232, 1)
+		0%, rgba(125, 185, 232, 0) 90%, rgba(125, 185, 232, 0) 100%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, rgba(125, 185, 232, 1)
+		0%, rgba(125, 185, 232, 0) 90%, rgba(125, 185, 232, 0) 100%);
+	/* IE10+ */
+	background: radial-gradient(ellipse at center, rgba(125, 185, 232, 1) 0%,
+		rgba(125, 185, 232, 0) 90%, rgba(125, 185, 232, 0) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8',
+		endColorstr='#007db9e8', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+}
+
+#divCentro {
+	top: 20px;
+	position: relative;
+	width: 580px;
+	height: 450px;
+	float: left;
+	/*el overflow es quien hace gran parte de la magia*/
+	overflow: hidden;
+	/*cursor: pointer;*/
+}
+
+#divContenido #divCentro ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	left: 20px;
+	position: absolute;
+}
+
+#divContenido #divCentro ul li {
+	display: inline-block;
+	/*margin: 15px 9px;*/ /*
+	border: solid 1px #ccc;
+	border-radius: 3px;
+	background: #f1f1f1;*/
+	text-align: center;
+}
+
+#divContenido #divCentro ul li img {
+	padding: 0 10px;
+}
